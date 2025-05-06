@@ -10,7 +10,8 @@ typedef struct {
     char genero[30];
 } stAlumno;
 
-int cargarAlumnos(stAlumno arr[], int validos);void mostrarArreglo(stAlumno arr[], int validos);
+int cargarAlumnos(stAlumno arr[], int validos);
+void mostrarArreglo(stAlumno arr[], int validos);
 void buscarPorMatricula(stAlumno arr[], int validos);
 int encontrarMenorPos(int pos, int validos, stAlumno arr[]);
 void ordenarSeleccion(stAlumno arr[], int validos);
@@ -152,7 +153,7 @@ void ordenarSeleccion(stAlumno arr[], int validos){
 
 
 void encontrarMenorIns(int pos, stAlumno aux, stAlumno arr[]){
-    while(pos >= 0 && arr[pos].matricula < aux.matricula){
+    while(pos >= 0 && arr[pos].matricula > aux.matricula){
             ///pos es validos menos-1
         arr[pos + 1] = arr[pos];
         pos--;
@@ -165,8 +166,9 @@ void ordenarInsercion(stAlumno arr[], int validos){
     int i = 0;
     stAlumno aux;
 
-    while(i < validos){
-        encontrarMenorIns(i, aux, arr[i + 1]);
+    while(i < validos - 1){
+        aux = arr[i + 1];
+        encontrarMenorIns(i, aux, arr);
         i++;
     }
 }
