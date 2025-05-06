@@ -14,6 +14,8 @@ int cargarAlumnos(stAlumno arr[], int validos);void mostrarArreglo(stAlumno arr
 void buscarPorMatricula(stAlumno arr[], int validos);
 int encontrarMenorPos(int pos, int validos, stAlumno arr[]);
 void ordenarSeleccion(stAlumno arr[], int validos);
+void encontrarMenorIns(int pos, stAlumno aux, stAlumno arr[]);
+void ordenarInsercion(stAlumno arr[], int validos);
 
 int main()
 {
@@ -40,6 +42,9 @@ int main()
             ordenarSeleccion(arr, cantAlumnos);
             mostrarArreglo(arr, cantAlumnos);
             break;
+        case 5:
+            ordenarInsercion(arr,cantAlumnos);
+            mostrarArreglo(arr, cantAlumnos);
         }
 
     printf("\n Deseas ejecutar otro ejercicio? (s/n): ");
@@ -141,6 +146,27 @@ void ordenarSeleccion(stAlumno arr[], int validos){
         aux = arr[i];
         arr[i] = arr[posMenor];
         arr[posMenor] = aux;
+        i++;
+    }
+}
+
+
+void encontrarMenorIns(int pos, stAlumno aux, stAlumno arr[]){
+    while(pos >= 0 && arr[pos].matricula < aux.matricula){
+            ///pos es validos menos-1
+        arr[pos + 1] = arr[pos];
+        pos--;
+    }
+    /// 0 1 [2] 3 4 5    3<--
+    arr[pos+1]=aux;
+}
+
+void ordenarInsercion(stAlumno arr[], int validos){
+    int i = 0;
+    stAlumno aux;
+
+    while(i < validos){
+        encontrarMenorIns(i, aux, arr[i + 1]);
         i++;
     }
 }
